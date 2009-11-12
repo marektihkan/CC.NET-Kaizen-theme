@@ -1,0 +1,25 @@
+<!-- ProjectSideBar.vm: Start -->
+<div class="links section">
+  <h2>
+    <span>Section</span>
+  </h2>
+  <ul>
+    #foreach ($link in $links)
+      <li>
+        <span>
+          #if ($link.Text == "Latest Build")
+            <a id="latest-build" href="$link.Url" class="$link.LinkClass">
+          #else
+            <a href="$link.Url" class="$link.LinkClass">
+          #end
+            $link.Text
+          </a>
+        </span>
+      </li>
+    #end
+  </ul>
+</div>
+<div class="builds section">
+  $recentBuildsTable
+</div>
+<!-- ProjectSideBar.vm: End -->

@@ -1,0 +1,20 @@
+﻿<!-- LoginAction.vm: Start -->
+#if ($changePassword != "" || $action != "")
+	<div class="header-login">
+		#if ($changePassword != "")
+			<a href="$changePassword.Url" class="icon icon-change-password">
+				<span>$changePassword.Text</span>
+			</a>
+		#end
+		#if ($action != "")
+			#if ($action.Text == "Logout")
+				<a href="$action.Url" class="icon icon-logout">
+			#else
+				<a href="$action.Url" class="icon icon-login">
+			#end
+				<span>$action.Text</span>
+			</a>
+		#end
+	</div>
+#end
+<!-- LoginAction.vm: End -->

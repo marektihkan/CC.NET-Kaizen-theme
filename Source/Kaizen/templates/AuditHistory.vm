@@ -1,0 +1,62 @@
+<!-- AuditHistory.vm: Start -->
+<div class="section">
+  <h1 class="title">
+    <span class="title">Audit History</span>
+    #if ($currentProject.Length > 0)
+      <span class="title-data">
+        <a href="#" class="selection-link-show">
+          <span>$currentProject</span>
+          <span class="icon icon-large-down-arrow" />
+        </a>
+      </span>
+    #end
+  </h1>
+  <div class="selection hidden">
+    <ul class="selection-data">
+      #foreach ($projectLink in $projectLinks)
+      <li>
+        <a href="$projectLink.Url">
+          <span>$projectLink.Text</span>
+        </a>
+      </li>
+      #end
+    </ul>
+    <a href="#" class="icon icon-small-up-arrow selection-link-hide">
+      <span>Close</span>
+    </a>
+  </div>
+  <div class="section-content">
+    <table>
+      <tr>
+        <th class="label strong">Event Date/Time</th>
+        #if ($currentProject.Length > 0)
+        #else
+          <th class="label strong">Project</th>
+        #end
+        <th class="label strong">User</th>
+        <th class="label strong">Event</th>
+        <th class="label strong">Outcome</th>
+      </tr>
+      #foreach ($auditRecord in $auditHistory)
+        <tr>
+          <td class="data">$auditRecord.TimeOfEvent</td>
+          #if ($currentProject.Length > 0)
+          #else
+            <td class="data strong">$auditRecord.ProjectName</td>
+          #end
+          <td class="data strong">$auditRecord.UserName</td>
+          <td class="data">$auditRecord.EventType</td>
+          <td class="data">$auditRecord.SecurityRight</td>
+        </tr>
+        #if ($auditRecord.Message.Length > 0)
+          <tr>
+            <td colspan="5" class="data strong">
+              <span>$auditRecord.Message</span>
+            </td>
+          </tr>
+        #end
+      #end
+    </table>
+  </div>
+</div>
+<!-- AuditHistory.vm: End -->

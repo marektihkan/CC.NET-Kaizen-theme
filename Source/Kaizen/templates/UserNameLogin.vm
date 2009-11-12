@@ -1,0 +1,41 @@
+﻿<!-- UserNameLogin.vm: Start -->
+#if ($errorMessage.length > 0)
+  <div class="message failed">
+    $errorMessage
+  </div>
+#end
+<div class="section">
+  <h1 class="title">
+    <span class="title">User Login</span>
+  </h1>
+  <div class="section-content">
+    <form>
+      <table>
+        <tr>
+          <td>
+            <label for="userName">User name</label>
+          </td>
+          <td>
+            <input type="text" name="userName"/>
+          </td>
+        </tr>
+        #if (!$hidePassword)
+          <tr>
+            <td>
+              <label for="password">Password</label>
+            </td>
+            <td>
+              <input type="password" name="password"/>
+            </td>
+          </tr>
+        #end
+        <tr>
+          <td colspan="2">
+            <input type="submit" value="Login"/>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+<!-- UserNameLogin.vm: End -->

@@ -1,0 +1,120 @@
+<!-- ProjectGrid.vm: Start -->
+#if ($forceBuildMessage.Length > 0)
+<div class="message success">
+  <span>$forceBuildMessage</span>
+</div>
+#end
+
+<div class="section">
+  #if ($exceptions.Length > 0)
+    <h1 class="title failed">
+  #else
+    <h1 class="title">
+  #end
+    <span class="title">Projects</span>
+    <span class="title-data">
+      <a href="javascript:location.reload(true)" class="refresh-button icon icon-refresh"><span>Refresh</span></a>
+    </span>
+  </h1>
+  
+  #if ($exceptions.Length > 0)
+    <div class="section-content failed-light">
+      <table>
+        <tr>
+          <td colspan="3">
+            There were exceptions connecting to the following servers:
+          </td>
+        </tr>
+        <tr>
+          <th class="label strong">Server Name</th>
+          <th class="label strong">Url</th>
+          <th class="label strong">Message</th>
+        </tr>
+        #foreach ($exception in $exceptions)
+          <tr>
+            <td class="data">$exception.ServerName</td>
+            <td class="data">$exception.Url</td>
+            <td class="data">$exception.Message</td>
+          </tr>
+        #end
+      </table>
+    </div>
+  #end	
+</div>
+
+#if ($projectGrid.Length > 0)	
+  #foreach ($projectGridRow in $projectGrid)
+    <div class="section data-project">
+      #if ($projectGridRow.Activity == "Building")
+        <h1 class="title warning">
+      #elseif ($projectGridRow.BuildStatus == "Success")
+        <h1 class="title success">
+      #else
+        <h1 class="title failed">
+      #end
+        <span class="title">
+          <a href="$projectGridRow.Url" class="data-project-name">$projectGridRow.Name</a>
+        </span>
+        <span class="title-data">$projectGridRow.LastBuildLabel</span>
+      </h1>
+      #if ($projectGridRow.Activity == "Building")
+        <div class="section-content warning-light">
+      #elseif ($projectGridRow.BuildStatus == "Success")
+        <div class="section-content success-light">
+      #else
+        <div class="section-content failed-light">
+      #end
+        <table>
+          <tr>
+            <td class="label strong">Status</td>
+            <td class="data strong">
+              <span class="data-build-status">$projectGridRow.BuildStatus</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="label strong">Activity</td>
+            <td class="data strong">
+              <span class="data-project-activity">$projectGridRow.Activity</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="label strong">Last build date</td>
+            <td class="data strong">
+              <span class="data-last-build-date">$projectGridRow.LastBuildDate</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Server status</td>
+            <td class="data">
+              <span class="data-server-status">$projectGridRow.Status</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Messages</td>
+            <td class="data">$projectGridRow.CurrentMessage</td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <form method="post">
+                <input type="hidden" name="projectName" value="$projectGridRow.Name" />
+                <input type="hidden" name="serverName" value="$projectGridRow.ServerName" />
+                #if ($projectGridRow.allowForceBuild)
+                  <input type="submit" name="$projectGridRow.ForceAbortBuildButtonName" value="$projectGridRow.ForceAbortBuildButtonValue"/>
+                #end
+                #if ($projectGridRow.AllowStartStopBuild)				
+                  <input type="submit" name="$projectGridRow.StartStopButtonName" value="$projectGridRow.StartStopButtonValue"/>
+                #end
+              </form>
+            </td>
+          </tr>
+        </table>
+      </div>
+      #if ($projectGridRow.BuildStage.Length > 0)
+        <div class="section-content warning-light">
+          $projectGridRow.BuildStage
+        </div>
+      #end
+   </div>
+  #end
+#end
+<!-- ProjectGrid.vm: End -->

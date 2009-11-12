@@ -1,0 +1,30 @@
+﻿<!-- PackageList.vm: Start -->
+<div class="section">
+  <h1 class="title">
+    <span class="title">Available Packages</span>
+    <span class="title-data">$projectName</span>
+  </h1>
+  <div class="section-content">
+    <table>
+      <tr>
+        <th class="label strong">Package Name</th>
+        <th class="label strong">Build Label</th>
+        <th class="label strong">Number of Files</th>
+        <th class="label strong">Package Size</th>
+      </tr>
+      #foreach ($package in $packages)
+        <tr>
+          <td class="data strong">
+            <a href="RetrieveFile.aspx?file=$package.FileName" target="_blank">
+              <span>$package.Name</span>
+            </a>
+          </td>
+          <td class="data">$package.BuildLabel</td>
+          <td class="data">$package.NumberOfFiles</td>
+          <td class="data">$package.Size</td>
+        </tr>
+      #end
+    </table>
+  </div>
+</div>
+<!-- PackageList.vm: End -->

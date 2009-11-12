@@ -1,0 +1,7 @@
+<!-- BuildRows.vm: Start -->
+<ul class="invisible">
+#foreach ($link in $links)
+	<li class="build $link.LinkClass"><span><a href="$link.Url">$link.Text</a></span></li>
+#end
+</ul>
+<!-- BuildRows.vm: End -->

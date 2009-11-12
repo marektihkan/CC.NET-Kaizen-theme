@@ -1,0 +1,16 @@
+<!-- ServerSideBar.vm: Start -->
+<div class="links section">
+  <h2>
+    <span>Section</span>
+  </h2>
+  <ul>
+    #foreach ($link in $links)
+      <li>
+        <span>
+          <a href="$link.Url" class="$link.LinkClass">$link.Text</a>
+        </span>
+      </li>
+    #end
+  </ul>
+</div>
+<!-- ServerSideBar.vm: End -->

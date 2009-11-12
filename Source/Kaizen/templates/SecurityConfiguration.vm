@@ -1,0 +1,32 @@
+<!-- SecurityConfiguration.vm: Start -->
+<div class="section">
+  <h1 class="title">
+    <span class="title">Server Security Configuration</span>
+    #if ($currentProject.Length > 0)
+      <span class="title-data">
+        <a href="#" class="selection-link-show">
+          <span>$currentProject</span>
+          <span class="icon icon-large-down-arrow" />
+        </a>
+      </span>
+    #end
+  </h1>
+  <div class="selection hidden">
+    <ul class="selection-data">
+      #foreach ($projectLink in $projectLinks)
+        <li>
+          <a href="$projectLink.Url">
+            <span>$projectLink.Text</span>
+          </a>
+        </li>
+      #end
+    </ul>
+    <a href="#" class="icon icon-small-up-arrow selection-link-hide">
+      <span>Close</span>
+    </a>
+  </div>
+  <div class="section-content">
+    <pre class="log">$log</pre>
+  </div>
+</div>
+<!-- SecurityConfiguration.vm: End -->

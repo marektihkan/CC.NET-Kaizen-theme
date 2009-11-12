@@ -1,0 +1,6 @@
+<!-- RecentBuilds.vm: Start -->
+<h2>
+  <span>Recent Builds</span>
+</h2>
+$buildRows
+<!-- RecentBuilds.vm: End -->

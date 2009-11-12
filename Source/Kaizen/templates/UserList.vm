@@ -1,0 +1,88 @@
+<!-- UserList.vm: Start -->
+<script type="text/javascript">
+  $(document).ready(function(){
+      $('#securityPopUp').dialog({
+        autoOpen:false,
+        modal:true,
+        title:'Permission Diagnostics',
+        width:400,
+        height:300,
+        overlay:{
+          opacity:0.5,
+          background:'black'
+        }
+      });
+  });
+  function displayDetails(userName){
+    $('#securityPopUpContent').replaceWith('<div id="securityPopUpContent">Loading, please wait...</div>');
+    $('#securityPopUpContent').load('$diagnosticsCall.Url',{
+#if ($currentProject.Length > 0)
+      project:'$currentProject',
+#end
+      user:userName
+    });
+    $('#securityPopUp').dialog('open');
+  }
+</script>
+#if ($message.length > 0)
+<div class="message success">
+  <span>$message</span>
+</div>
+#end
+#if ($error.length > 0)
+<div class="message failed">
+  <span>$error</span>
+</div>
+#end
+<div id="securityPopUp" class="dialog">
+  <div id="securityPopUpContent"></div>
+</div>
+
+<div class="section">
+  <h1 class="title">
+    <span class="title">Defined Users</span>
+    #if ($currentProject.Length > 0)
+      <span class="title-data">
+        <a href="#" class="selection-link-show">
+          <span>$currentProject</span>
+          <span class="icon icon-large-down-arrow" />
+        </a>
+      </span>
+    #end
+  </h1>
+  <div class="selection hidden">
+    <ul class="selection-data">
+      #foreach ($projectLink in $projectLinks)
+        <li>
+          <a href="$projectLink.Url">
+            <span>$projectLink.Text</span>
+          </a>
+        </li>
+      #end
+    </ul>
+    <a href="#" class="icon icon-small-up-arrow selection-link-hide">
+      <span>Close</span>
+    </a>
+  </div>
+  <div class="section-content">
+    <table>
+      <tr>
+        <th class="label strong">User Name</th>
+        <th class="label strong">Display Name</th>
+        <th class="label strong">Type</th>
+      </tr>
+      #foreach ($userRow in $users)
+        <tr>
+          <td class="data strong">
+            <a href="#" onclick="displayDetails('$userRow.UserName')">$userRow.UserName</a>
+          </td>
+          <td class="data">
+            <a href="#" onclick="displayDetails('$userRow.UserName')">$userRow.DisplayName</a>
+          </td>
+          <td class="data strong">$userRow.type</td>
+        </tr>
+      #end
+    </table>
+  </div>
+</div>
+<!-- UserList.vm: End -->

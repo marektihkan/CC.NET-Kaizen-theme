@@ -1,0 +1,5 @@
+﻿<!-- LoggedOut.vm: Start -->
+<div class="message success">
+  <span>You have successfully logged out</span>
+</div>
+<!-- LoggedOut.vm: End -->

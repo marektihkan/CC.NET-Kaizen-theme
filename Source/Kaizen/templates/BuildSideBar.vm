@@ -1,0 +1,41 @@
+<!-- BuildSideBar.vm: Start -->
+<div class="build-navigation section">
+  <h2>
+    <span>Builds</span>
+  </h2>
+  <ul>
+    <li>
+      <span>
+        <a id="latest-build" href="$latestLink.Url">Latest</a>
+      </span>
+    </li>
+    <li>
+      <span>
+        <a id="next-build" href="$nextLink.Url">Next</a>
+      </span>
+    </li>
+    <li>
+      <span>
+        <a id="previous-build" href="$previousLink.Url">Previous</a>
+      </span>
+    </li>
+  </ul>
+</div>
+<div class="links section">
+  <h2>
+    <span>Sections</span>
+  </h2>
+  <ul>
+    #foreach ($link in $links)
+    <li>
+      <span>
+        <a href="$link.Url" class="$link.LinkClass">$link.Text</a>
+      </span>
+    </li>
+    #end
+  </ul>
+</div>
+<div class="builds section">
+  $recentBuildsTable
+</div>
+<!-- BuildSideBar.vm: End -->

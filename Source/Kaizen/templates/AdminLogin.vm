@@ -1,0 +1,33 @@
+<!-- AdminLogin.vm: Start -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('INPUT:password').focus();
+	});
+</script>
+
+#if ($Error != "")
+<div class="message failed">
+	<span>$Error</span>
+</div>
+#end
+
+<div class="section">
+	
+	<h1 class="title">
+		<span class="title">Administration Dashboard</span>
+	</h1>
+	<div class="section-content">
+		<table>
+			<tr>
+				<td class="data">The administration console is password protected, please enter your password:</td>
+				<td class="data">
+					<form method="post">
+						<input type="password" name="password" />
+						<input type="submit" value="Enter" />
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>		
+</div>
+<!-- AdminLogin.vm: End -->

@@ -1,0 +1,32 @@
+<!-- TopMenu.vm: Start -->
+<div>
+  <ul>
+    <li class="route route-dashboard">
+      <a href="$farmLink.Url">
+        <span>Dashboard</span>
+      </a>
+    </li>
+    #if ( ! ($serverName == "" ) )
+      <li class="route route-server">
+        <a href="$serverLink.Url">
+          <span>$serverLink.Text</span>
+        </a>
+      </li>
+      #if ( ! ( $projectName == "" ) )
+        <li class="route route-project">
+          <a href="$projectLink.Url">
+            <span>$projectLink.Text</span>
+          </a>
+        </li>
+        #if ( ! ( $buildName == "" ) )
+          <li class="route route-build">    
+            <a href="$buildLink.Url">
+              <span>$buildLink.Text</span>
+            </a>
+          </li>
+        #end
+      #end
+    #end
+  </ul>
+</div>
+<!-- TopMenu.vm: End -->

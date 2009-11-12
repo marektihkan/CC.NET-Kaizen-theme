@@ -1,0 +1,5 @@
+﻿<!-- LoggedIn.vm: Start -->
+<div class="message success">
+  <span>You have successfully logged in</span>
+</div>
+<!-- LoggedIn.vm: End -->

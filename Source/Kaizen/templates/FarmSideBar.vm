@@ -1,0 +1,49 @@
+<!-- FarmSideBar.vm: Start -->
+<div class="search">
+	<h2><span>Find <input type="text" id="searchbox" /></span></h2>
+</div>
+#if ($showCategories)
+<div class="categories section">
+  <h2>
+    <span>Categories</span>
+  </h2>
+  <ul>
+    #foreach ($categorylink in $categorylinks)
+	  <li>
+	    <span>
+	      <a href="$categorylink.Url" class="$categorylink.LinkClass">$categorylink.Text</a>
+	    </span>
+	  </li>
+	#end
+  </ul>
+</div>
+#end
+<div class="links section">
+  <h2>
+    <span>Sections</span>
+  </h2>
+  <ul>
+    #foreach ($link in $links)
+    <li>
+      <span>
+        <a href="$link.Url" class="$link.LinkClass">$link.Text</a>
+      </span>
+    </li>
+    #end
+  </ul>
+</div>
+<div class="servers section">
+<h2>
+    <span>Servers</span>
+  </h2>
+  <ul>
+    #foreach ($slink in $serverlinks)
+    <li>
+      <span>
+        <a href="$slink.Url" class="$slink.LinkClass">$slink.Text</a>
+      </span>
+    </li>
+    #end
+  </ul>
+</div>
+<!-- FarmSideBar.vm: End -->

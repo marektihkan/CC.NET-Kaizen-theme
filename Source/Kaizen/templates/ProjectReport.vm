@@ -1,0 +1,160 @@
+<!-- ProjectReport.vm: Start -->
+#if ($StatusMessage.Length > 0)
+<div class="message success">
+  <span>$StatusMessage</span>
+</div>
+#end
+
+<div class="section">
+  #if ($status.BuildStatus == "Failure")
+    <h1 class="title failed">
+  #elseif ($status.BuildStatus == "Success")
+    <h1 class="title success">
+  #elseif ($status.BuildStatus == "Exception")
+    <h1 class="title warning">
+  #elseif ($status.BuildStatus == "Unknown")
+    <h1 class="title warning">
+  #else
+    <h1 class="title">
+  #end
+    <span class="title">$projectName</span>
+    #if ($rssDataPresent)
+      <span class="title-data">
+        <a href="$rss.url" class="button-rss icon icon-rss">
+          <span>RSS</span>
+        </a>  
+      </span>
+    #end
+  </h1>
+  #if ($externalLinks.Length > 0)
+    <div class="section-content">
+      <table>
+        #foreach ($externalLink in $externalLinks)
+          <tr>
+            <td>
+              <a class="externalLink" href="$externalLink.Url">$externalLink.Name</a>
+            </td>
+          </tr>
+        #end
+      </table>
+    </div>
+  #end
+</div>
+<div class="section">
+  <h1 class="title">
+    <span class="title">Status</span>
+  </h1>
+  <div class="section-content">
+    <table>
+      <tr>
+        <td class="label strong">Last Build Status</td>
+        <td class="data strong">$status.BuildStatus</td>
+      </tr>
+      <tr>
+        <td class="label strong">Last Build Label</td>
+        <td class="data strong">$status.LastBuildLabel</td>
+      </tr>
+      <tr>
+        <td class="label strong">CCNet Status</td>
+        <td class="data strong">$status.Status</td>
+      </tr>
+      <tr>
+        <td class="label strong">Activity</td>
+        <td class="data strong">$status.Activity</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <form methd="POST">
+            #if ($server.AllowForceBuild)
+              <input type="submit" name="$ForceAbortBuildButtonName" value="$ForceAbortBuildButtonValue"/>
+            #end
+            #if ($server.AllowStartStopBuild)
+              <input type="submit" name="$StartStopButtonName" value="$StartStopButtonValue"/>
+            #end
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>		
+</div>
+<div class="section">
+  <h1 class="title">
+    <span class="title">Build</span>
+  </h1>
+  <div class="section-content">
+    <table>
+      #if ($noLogsAvailable)
+        <tr>
+          <td>
+            There are currently no build logs available for this project - make sure your Build Server configuration is correct and that this Project's build is not throwing any exceptions
+          </td>
+        </tr>
+      #else
+        #if ($pluginInfo)
+          <tr>
+            <td class="label strong">Most Recent Build Results</td>
+          </tr>
+          <tr>
+            <td class="data">$pluginInfo</td>
+          </tr>
+        #end
+        <tr>
+          <td class="data">Click <a href="$mostRecentBuildUrl">here</a> for the full build report.</td>
+        </tr>
+      #end
+    </table>
+  </div>
+</div>
+#if ($highestAmountPerDay > 0) 
+  #set($highestViewPerDay= $highestAmountPerDay / $dateMultiPlier)
+  <div class="section">
+    <h1 class="title">
+      <span class="title">Build Overview</span>
+    </h1>
+    <div class="section-content">
+      <table>	
+        <tr>
+          <td colspan="2" align="center"> $OKPercent% </td>
+        </tr>
+        <tr height=5> 
+          <td width="$OKPercent%" class="success"> </td>
+          <td width="$NOKPercent%" class="failed"> </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table border="0" cellspacing="0" cellpadding="0">
+              #foreach ($dayBuildCounter in [1..$highestViewPerDay])
+                <tr align="center">
+                  #foreach ($currentDayInfo in $graphDayInfo)
+                    #foreach ($multi in [1..$dateMultiPlier])
+                      #set ($cellIndex =  (($highestViewPerDay - $dayBuildCounter) *  $dateMultiPlier) + $multi)
+                      #if ( $cellIndex <= $currentDayInfo.AmountOfBuilds)
+                        #set ($buildIndex =  $cellIndex - 1 )
+                        #if ($currentDayInfo.Build($buildIndex).IsSuccesFull) 
+                          #set($color = "success")
+                        #else 
+                          #set($color ="failed")
+                        #end
+                        <td class="$color">
+                          <a href="$currentDayInfo.Build($buildIndex).LinkTobuild" title="$currentDayInfo.Build($buildIndex).Description" class="report-link">$cellIndex</a>
+                        </td>
+                      #else
+                        <td></td>
+                      #end
+                    #end
+                  #end
+                </tr>
+              #end
+              <tr align="center">
+                #foreach ($currentDayInfo in $graphDayInfo)
+                  <td colspan="$dateMultiPlier" class="show-line-breaks">$currentDayInfo.BuildDateFormatted</td>
+                #end
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+#end
+<!-- ProjectReport.vm: End -->

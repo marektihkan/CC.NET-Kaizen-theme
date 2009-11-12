@@ -1,0 +1,39 @@
+﻿<!-- ActionException.vm: Start -->
+#if ($exception.GetType().Name == "PermissionDeniedException")
+	<div class="message failed">
+		<span>
+			<strong>You do not have permission for this action</strong><br/>
+			Please contact your build administrator.
+		</span>
+	</div>
+#elseif ($exception.GetType().Name == "SessionInvalidException")
+	<div class="message failed">
+		<span>
+			<strong>Your session is invalid</strong><br/>
+			Please login again or contact your build administrator.
+		</span>
+	</div>
+#else
+	<div class="message failed">
+		<span>There was an exception trying to carry out your request</span>
+	</div>
+	<div class="section">
+		<h1 class="title failed">
+			<span class="title">Exception</span>
+		</h1>
+		<div class="section-content failed-light">
+			<table>
+				<tr>
+					<td class="data strong">$exception.Message</td>
+				</tr>
+				<tr>
+					<th class="label strong">Full Details</th>
+				</tr>
+				<tr>
+					<td class="data"><pre>$exception.ToString()</pre></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+#end
+<!-- ActionException.vm: End -->

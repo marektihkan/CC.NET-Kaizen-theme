@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Continuous Integration - CruiseControl.NET</title>
+
+  <link type="text/css" rel="stylesheet" href="$applicationPath/Themes/Kaizen/css/base.styles.css" media="screen, projection" title="Default" />
+  <link type="text/css" rel="stylesheet" href="$applicationPath/Themes/Kaizen/css/jquery.ui.css" media="screen, projection" />
+  
+  <script type="text/javascript" src="$applicationPath/Themes/Kaizen/js/jquery-1.3.2.min.js"></script>
+  <script type="text/javascript" src="$applicationPath/Themes/Kaizen/js/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="$applicationPath/Themes/Kaizen/js/jquery.timers.js"></script>
+  <script type="text/javascript" src="$applicationPath/Themes/Kaizen/js/jquery.xphtooltip.min.js"></script>
+  <script type="text/javascript" src="$applicationPath/Themes/Kaizen/js/shortcut.js"></script>
+  <script type="text/javascript" src="$applicationPath/Themes/Kaizen/js/datejs.js"></script>
+  <script type="text/javascript" src="$applicationPath/Themes/Kaizen/js/global.js"></script>
+</head>
+<body>
+  <div id="header">
+    <div class="header-logo">
+      <span class="heading">Continuous Integration</span>
+      <span class="subheading">Cruise Control.NET</span>
+    </div>
+    $loginView
+    <div class="header-navigation">
+      $breadcrumbs
+    </div>
+  </div>
+  <div id="main" class="clear">
+    <div id="menu">
+      <div class="build-views">
+        <ul class="colors">
+          <li id="toggle-failed" class="failed">
+            <span>Toggle failed</span>
+          </li>
+          <li id="toggle-warning" class="warning">
+            <span>Toggle warning</span>
+          </li>
+          <li id="toggle-success" class="success">
+            <span>Toggle success</span>
+          </li>
+        </ul>
+        <ul class="content">
+          <li id="show-all" class="icon icon-show-sections">
+            <span>Show all</span>
+          </li>
+          <li id="hide-all" class="icon icon-hide-sections">
+            <span>Hide all</span>
+          </li>
+          <li id="show-errors" class="icon icon-show-errors">
+            <span>Show errors</span>
+          </li>
+        </ul>
+      </div>
+      $sidebar
+      <div class="help section">
+        <h2>
+          <span>Help</span>
+        </h2>
+        <ul>
+          <li>
+            <span>
+              <a href="$applicationPath/doc/index.html">Documentation</a>
+            </span>
+          </li>
+          <li>
+            <span>
+              <a href="#" class="link-help-shortcuts">Shortcuts</a>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="content">$mainContent</div>
+  </div>
+  <div id="footer" class="clear">
+    <div class="version">
+      <span>version $dashboardversion</span>
+    </div>
+    <div class="authors">
+      <a href="http://www.saiku.eu" class="saiku" alt="Theme designed by Saiku">
+        <span>Theme designed by Saiku</span>
+      </a>
+      <a href="http://www.thoughtworks.com" class="thought-works" alt="Development supported by ThoughtWorks">
+        <span>Development supported by ThoughtWorks</span>
+      </a>
+    </div>
+  </div>
+  <div id="help-shortcuts" class="dialog">
+    <table>
+      <tr>
+        <td class="label strong">Key</td>
+        <td class="label strong">Description</td>
+      </tr>
+      <tr>
+        <td class="data strong">D</td>
+        <td class="data">Navigate to dashboard</td>
+      </tr>
+      <tr>
+        <td class="data strong">Q</td>
+        <td class="data">Expands all sections</td>
+      </tr>
+      <tr>
+        <td class="data strong">W</td>
+        <td class="data">Collapses all sections</td>
+      </tr>
+      <tr>
+        <td class="data strong">E</td>
+        <td class="data">Expands sections with errors and warnings</td>
+      </tr>
+      <tr>
+        <td class="data strong">G</td>
+        <td class="data">Shows/hides green sections</td>
+      </tr>
+      <tr>
+        <td class="data strong">Y</td>
+        <td class="data">Shows/hides yellow sections</td>
+      </tr>
+      <tr>
+        <td class="data strong">R</td>
+        <td class="data">Shows/hides red sections</td>
+      </tr>
+      <tr>
+        <td class="data strong">1..9</td>
+        <td class="data">Navigates to project (dashboard); Navigates to menu link</td>
+      </tr>
+      <tr>
+        <td class="data strong">F</td>
+        <td class="data">Find project</td>
+      </tr>
+      <tr>
+        <td class="data strong">L</td>
+        <td class="data">Navigates to project last build</td>
+      </tr>
+      <tr>
+        <td class="data strong">Z</td>
+        <td class="data">Navigates to previous build</td>
+      </tr>
+      <tr>
+        <td class="data strong">X</td>
+        <td class="data">Navigates to next build</td>
+      </tr>
+      <tr>
+        <td class="data strong">B</td>
+        <td class="data">Expands/collapses recent builds</td>
+      </tr>
+      <tr>
+        <td class="data strong">H</td>
+        <td class="data">Expands/collapses help</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

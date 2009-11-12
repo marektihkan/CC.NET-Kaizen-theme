@@ -1,0 +1,9 @@
+<!-- AllBuilds.vm: Start -->
+<div class="section">
+  <h1 class="title">
+    <span class="title">All Builds</span>
+  </h1>
+</div>
+
+$buildRows
+<!-- AllBuilds.vm: End -->

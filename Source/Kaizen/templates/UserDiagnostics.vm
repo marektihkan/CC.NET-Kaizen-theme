@@ -1,0 +1,36 @@
+<!-- UserDignostics.vm: Start -->
+<div>
+  <table class="userList-table">
+    <tr>
+      <td class="label strong">User Name:</td>
+      <td class="data strong">$userName</td>
+    </tr>
+    <tr>
+      <td class="label strong">Location:</td>
+      <td class="data strong">
+        #if ($projectName.Length > 0)
+          Project '$projectName'
+        #else
+          Server
+        #end
+      </td>
+    </tr>
+    #foreach ($diagnosis in $diagnostics)
+    <tr>
+      <td class="label">$diagnosis.Permission:</td>
+      <td class="data">
+        #if ($diagnosis.IsAllowed)
+        Allowed
+        #else
+        Denied
+        #end
+      </td>
+    </tr>
+    #end
+  </table>
+  <form method="post">
+    <input type="hidden" name="user" value="$userName"/>
+    <input id="dialog_link" type="Submit" name="action" value="Reset password"/>
+  </form>
+</div>
+<!-- UserDignostics.vm: End -->

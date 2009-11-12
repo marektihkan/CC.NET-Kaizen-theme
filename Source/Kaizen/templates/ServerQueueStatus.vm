@@ -1,0 +1,26 @@
+<!-- ServerQueueStatus.vm: Start -->
+<div class="section">
+  <h1 class="title">
+    <span class="title">Server Queue Status</span>
+  </h1>
+  <div class="section-content">
+    <table>
+      <tr>
+        <td class="label strong">Project</td>
+        <td class="label strong">Status</td>
+      </tr>
+      #foreach ($queue in $queues)
+        <tr>
+          <td colspan="2" class="label strong">$queue.QueueName</td>
+        </tr>
+        #foreach ($project in $queue.Requests)
+          <tr>
+            <td class="data">$project.ProjectName</td>
+            <td class="data">$project.Activity</td>
+          </tr>
+        #end
+      #end
+    </table>
+  </div>
+</div>
+<!-- ServerQueueStatus.vm: End -->

@@ -1,0 +1,251 @@
+<!-- AdministerDashboard.vm: Start -->
+<script type="text/javascript" src="Themes/Kaizen/js/administration.js"></script>
+
+<div id="PackageImportDialog" class="dialog">
+	<form method="post" enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td>
+					<label for="packageLocation">Package:</label>
+				</td>
+				<td>
+					<input type="file" name="package" id="packageLocation" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" class="button" name="Action" value="Import" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div id="LogDialog" class="dialog">
+	<ol>
+		#foreach ($Event in $Events)
+			<li class="$Event.Level">$Event.Message</li>
+		#end
+    </ol>
+</div>
+<div id="ServerDeleteDialog" class="dialog">
+	<form method="post">
+		<table>
+			<tr>
+				<td class="data strong">Are you sure you want to delete the server '<span id="deleteServerLabel">Name</span>'?</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="right">
+					<input type="hidden" name="type" value="server" />
+					<input type="hidden" name="ServerName" id="deleteServerField" />
+					<input type="submit" name="Action" value="Delete" />
+					<input type="button" id="cancelDeleteServer" value="Cancel" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div id="PackageDetailsDialog" class="dialog">
+	<form method="post">
+		<table>
+			<tr>
+				<td>
+					<label for="PackageDetailsDialogName" class="data strong">Name</label>
+				</td>
+				<td>
+					<span id="PackageDetailsDialogName">Name</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="PackageDetailsDialogDescription" class="data strong">Description</label>
+				</td>
+				<td>
+					<span id="PackageDetailsDialogDescription">Description</span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="hidden" name="type" value="package" />
+					<input type="hidden" name="PackageName" id="nameOfPackage" />
+					<input type="submit" id="installButton" name="action" />
+					<input type="submit" id="removeButton" name="action" value="Remove" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div id="ServerDetailsDialog" class="dialog">
+	<form method="post" onSubmit="return ValidateServerDetailsDialog()">
+		<table>
+			<tr>
+				<td>
+					<label for="serverName" class="data strong">Name</label>
+				</td>
+				<td>
+					<input type="hidden" class="text" id="oldName" name="oldName" />
+					<input type="text" class="text" id="serverName" name="newName" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="serverUri" class="data strong">URI</label>
+				</td>
+				<td>
+					<input type="text" class="text" id="serverUri" name="serverUri" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="checkbox" id="serverForceBuild" name="serverForceBuild" />
+					<label for="serverForceBuild">Enable forcing and aborting builds</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="checkbox" id="serverStartStop" name="serverStartStop" />
+					<label for="serverStartStop">Enable starting and stoping project on server</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="hidden" name="type" value="server" />
+					<input type="button" class="dialog-link" id="deleteServer" name="action" value="Delete" />
+					<input type="submit" name="action" value="Save" />
+					<input type="button" id="cancelServer" value="Cancel" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+#if ($Result.Length > 0)
+<div class="message success">
+	<span>$Result</span>
+	#if ($Events)
+	<input type="button" value="View Log" id="viewLogButton" />
+	#end
+	#if ($InstallPackage.Length > 0)
+	<form method="post">
+		<input type="hidden" name="PackageName" value="$InstallPackage" />
+		<input type="submit" name="Action" value="Install" />
+	</form>
+	#end
+</div>
+#end
+#if ($Error != "")
+<div class="message failed">
+	<span>$Error</span>
+	#if ($Events)
+	<span>(<a href="#" id="viewLogLink">View Log</a>)</span>
+	#end
+</div>
+#end
+
+<div class="section">	
+	<h1 class="title">
+		<span class="title">Administration Dashboard</span>
+		<span class="title-data">
+			<form method="post">
+				<input type="hidden" name="Action" value="Reload dashboard" />
+				<span class="reload-button icon icon-reload"><input type="submit" value="Reload dashboard" /></span>
+			</form>
+			<form method="post">
+				<input type="hidden" name="Action" value="Logout" />
+				<span class="logout-button icon icon-large-logout"><input type="submit" value="Logout" /></span>
+			</form>		
+		</span>
+	</h1>
+</div>
+
+<div id="Servers" class="section">
+	<h1 class="title">
+		<span class="title">Remote Servers</span>
+	</h1>
+	<div class="section-content">
+		<table>
+			<tr>
+				<td class="label strong">Name</td>
+				<td class="label strong">Link</td>
+			</tr>
+			#foreach ($Server in $Servers)
+			<tr>
+				<td class="data strong">
+					<a href="#" class="dialog-link">
+						<span class="data-name">$Server.Name</span>
+					</a>
+					
+					#if ($Server.AllowForceBuild)
+					<span class="data-force-build-enabled hidden"></span>
+					#else
+					<span class="data-force-build-disabled hidden"></span>
+					#end
+					
+					#if ($Server.AllowStartStopBuild)
+					<span class="data-start-enabled hidden"></span>
+					#else
+					<span class="data-start-disabled hidden"></span>
+					#end
+				</td>
+				<td class="data">
+					<a href="#" class="dialog-link">
+						<span class="data-url">$Server.Url</span>
+					</a>
+				</td>
+			</tr>
+			#end
+			<tr>
+				<td colspan="2">
+					<form method="post">
+        				<input type="button" id="addServerButton" value="Add New Server" class="dialog-link" />
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>		
+</div>
+<div id="Packages" class="section">
+	<h1 class="title">
+		<span class="title">Packages</span>
+	</h1>
+	<div class="section-content">
+		<table>
+			<tr>
+				<td class="label strong">Name</td>
+				<td class="label strong">Description</td>
+				<td class="label strong">Status</td>
+			</tr>
+			#foreach ($Package in $Packages)
+			<tr>
+				<td class="data strong">
+					<a href="#" class="dialog-link">
+						<span class="data-name">$Package.Name</span>
+					</a>
+					<span class="hidden data-filename">$Package.FileName</span> 
+				</td>
+				<td class="data"><span class="data-description">$Package.Description</span></td>
+				<td class="data">
+					#if ($Package.IsInstalled)
+                    <span class="data-installed">[Installed]</span>
+					#else
+					<span class="data-not-installed">[Not installed]</span>
+                    #end
+				</td>
+			</tr>
+			#end
+			<tr>
+				<td colspan="3">
+					<form method="post">
+        				<input type="button" id="loadPackageButton" value="Load Package" class="dialog-link" />
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>		
+</div>
+<!-- AdministerDashboard.vm: End -->

@@ -1,0 +1,13 @@
+<!-- BuildLog.vm: Start -->
+<div class="section">
+  <h1 class="title">
+    <span class="title">Build Log</span>
+  </h1>
+  <div class="section-content">
+    <p>
+      Click <a href="$logUrl">here</a> to open log in its own page
+    </p>
+    <pre class="log">$log</pre>
+  </div>
+</div>
+<!-- BuildLog.vm: End -->
