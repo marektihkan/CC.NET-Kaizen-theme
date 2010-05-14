@@ -12,6 +12,13 @@
           <span>$serverLink.Text</span>
         </a>
       </li>
+      #if ($categoryName != "")
+      <li class="route route-category">
+        <a href="$categoryLink.Url">
+          <span>$categoryLink.Text</span>
+        </a>
+      </li>
+      #end
       #if ( ! ( $projectName == "" ) )
         <li class="route route-project">
           <a href="$projectLink.Url">
