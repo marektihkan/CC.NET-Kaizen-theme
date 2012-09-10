@@ -1,13 +1,21 @@
 <!-- BuildLog.vm: Start -->
+	
+
 <div class="section">
   <h1 class="title">
     <span class="title">Build Log</span>
   </h1>
   <div class="section-content">
     <p>
-      Click <a href="$logUrl">here</a> to open log in its own page
+      <span>Click <a href="$logUrl">here</a> to open log in its own page</span>	  
     </p>
-    <pre class="log">$log</pre>
+    <pre class="log brush: xml">$log</pre>
+	
+	<script type="text/javascript">
+			//SyntaxHighlighter.all();
+	</script>
   </div>
 </div>
+
+
 <!-- BuildLog.vm: End -->

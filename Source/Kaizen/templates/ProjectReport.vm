@@ -1,4 +1,24 @@
 <!-- ProjectReport.vm: Start -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#parameterCheck').dialog({
+        autoOpen:false,
+        modal:true,
+        title:'Project Parameters',
+        width:400,
+        height:300,
+        overlay:{
+            opacity:0.5,
+            background:'black'
+          }
+        });      
+    });
+</script>
+<div id="parameterCheck">
+  <div id="parameterEditor">$translations.Translate("Loading parameters, please wait...")</div>
+</div>
+
+
 #if ($StatusMessage.Length > 0)
 <div class="message success">
   <span>$StatusMessage</span>
@@ -66,7 +86,7 @@
         <td colspan="2">
           <form methd="POST">
             #if ($server.AllowForceBuild)
-              <input type="submit" name="$ForceAbortBuildButtonName" value="$ForceAbortBuildButtonValue"/>
+              <input type="button" name="$ForceAbortBuildButtonName" value="$ForceAbortBuildButtonValue" onclick="checkForParams(this, '$ParametersUrl')"/>
             #end
             #if ($server.AllowStartStopBuild)
               <input type="submit" name="$StartStopButtonName" value="$StartStopButtonValue"/>

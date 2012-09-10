@@ -22,7 +22,7 @@
 				</xsl:when>
 			</xsl:choose>
 			<span class="title"><xsl:value-of select="$title"/></span>
-			<span class="title-data"><xsl:value-of select="$data"/></span>
+			<span class="title-data"><xsl:copy-of select="$data"/></span>
 		</h1>
 	</xsl:template>
 
