@@ -93,7 +93,7 @@ INPUT.invalid { background-color: #ce2a1b; }
 ----------------------------------*/
 .success-text { color: #4e800c !important; }
 .failed-text { color: #ce2a1b !important; }
-.warning-text { color: #f0b440 !important; }
+.warning-text { color: #B77F12 !important; }
 .failed-underline { border-bottom: dotted 2px #ce2a1b; }
 
 /* Layout

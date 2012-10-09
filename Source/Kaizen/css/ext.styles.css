@@ -79,6 +79,20 @@ tr.msbuild-summary-success td, tr.msbuild-summary-failure td  {
 	vertical-align: top;
 }
 
+.table-container { table-layout: fixed; }
+.table-container tr{}
+.table-container tr td {}
+.table-container tr td span.long-text {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 760px;
+	display: block;	
+}
+
+/*.table-container tr td span:hover {
+	overflow: visible;
+}*/
+
 tr.msbuild-summary-success td { background: #FFF url("../images/ext/menu_links_bg_green.png"); }
 tr.msbuild-summary-failure td { background: #FFF url("../images/ext/menu_links_bg_red.png"); }
 tr.msbuild-project td, tr.msbuild-target td { font-weight: bold; }
@@ -103,6 +117,30 @@ div.section a.msbuildMessagesOff { background-position: 0px -32px; }
 .forceThin { font-weight: normal; color: #ADA39D; }
 .mspec-context-name { font-size: 110%; font-style: italic; }
 .stacktrace { font-size: 90%; font-style: italic; }
+
+/* Modifications section in report */
+.data-modification-user img {
+	width: 48px;
+}
+
+.data-modification-comment {
+	font-style: italic;
+}
+
+.data-modification-filename {
+	font-weight: bold;
+}
+
+.data-modification-date {
+	text-align: right;
+	color: #ADA39D; 
+	font-style: italic;
+}
+
+.data img.filestate {
+	width: 16px;
+	margin-right: 4px;
+}
 
 /* Tree
 ----------------------------------------*/

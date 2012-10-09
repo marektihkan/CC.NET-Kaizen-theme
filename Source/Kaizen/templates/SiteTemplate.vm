@@ -18,9 +18,11 @@
   <script type="text/javascript" src="$applicationPath/Themes/Kaizen/js/ext_additional.js"></script>
   <script type="text/javascript" src="$applicationPath/Themes/Kaizen/js/ccnet.js"></script>
   
-  <!-- syntax highlighter 
-	http://alexgorbatchev.com/SyntaxHighlighter/
-  -->
+  <!-- https://github.com/zachleat/jQuery-Gravatar -->
+  <script type="text/javascript" src="$applicationPath/Themes/Kaizen/js/md5.js"></script>
+  <script type="text/javascript" src="$applicationPath/Themes/Kaizen/js/jquery.gravatar.js"></script>
+    
+  <!-- syntax highlighter http://alexgorbatchev.com/SyntaxHighlighter/  -->
   <script type="text/javascript" src="$applicationPath/Themes/Kaizen/syntax_highlighter/scripts/shCore.js"></script>
   <link type="text/css" rel="stylesheet" href="$applicationPath/Themes/Kaizen/syntax_highlighter/styles/shCore.css" media="screen, projection" />  
   <link type="text/css" rel="stylesheet" href="$applicationPath/Themes/Kaizen/syntax_highlighter/styles/shThemeDefault.css" media="screen, projection" />  
@@ -30,7 +32,7 @@
 <body>
   <div id="header">
     <div class="header-logo">
-      <img src="$applicationPath/Themes/Kaizen/images/ext/ccnetlogo.gif" /><br/>	  
+      <img src="$applicationPath/Themes/Kaizen/images/ext/logo.gif" /><br/>	  
 	  <!--<span class="heading">Continuous Integration</span>
       <span class="subheading">Cruise Control.NET</span>-->  
 	  

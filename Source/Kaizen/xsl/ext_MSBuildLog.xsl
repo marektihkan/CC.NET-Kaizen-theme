@@ -81,7 +81,7 @@ History:
 				</xsl:call-template>
 			</xsl:attribute>
 			
-			<table>
+			<table class="table-container">
 				<xsl:apply-templates select="./*" />
 			</table>
 		  </div>		  
@@ -110,25 +110,39 @@ History:
 	<xsl:template match="//msbuild//message">
 		<tr class="msbuild-message-{./@level}">
 			<td>
-				<xsl:value-of select="." />
+				<span class="message-text long-text">
+					<xsl:attribute name="title">
+							<xsl:value-of select="."/>
+					</xsl:attribute><xsl:value-of select="." />
+				</span>
 			</td>
 		</tr>
 	</xsl:template>
 	
 	<xsl:template match="//msbuild//error">
 		<tr class="msbuild-summary-failure">
-			<td>
-				<img src="{$applicationPath}/Themes/Kaizen/images/ext/SuccessFalse.png" class="buildLogIcon" title="Error" />
-				<span class="failed-text"><xsl:value-of select="." /></span>
+			<td>				
+				<span class="failed-text long-text">
+					<xsl:attribute name="title">
+							<xsl:value-of select="."/>
+						</xsl:attribute>
+						<img src="{$applicationPath}/Themes/Kaizen/images/ext/SuccessFalse.png" class="buildLogIcon" title="Error" />
+						<xsl:value-of select="." />
+				</span>
 			</td>
 		</tr>
 	</xsl:template>
 	
 	<xsl:template match="//msbuild//warning">
 		<tr class="msbuild-warning">
-			<td>
-				<img src="{$applicationPath}/Themes/Kaizen/images/ext/Warning.png" class="buildLogIcon" title="Warning" />
-				<xsl:value-of select="." />
+			<td>				
+				<span class="warning-text long-text">
+					<xsl:attribute name="title">
+						<xsl:value-of select="."/>
+					</xsl:attribute>
+					<img src="{$applicationPath}/Themes/Kaizen/images/ext/Warning.png" class="buildLogIcon" title="Warning" />
+					<xsl:value-of select="." />
+				</span>
 			</td>
 		</tr>
 	</xsl:template>
