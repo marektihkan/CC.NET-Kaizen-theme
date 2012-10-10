@@ -142,6 +142,33 @@ div.section a.msbuildMessagesOff { background-position: 0px -32px; }
 	margin-right: 4px;
 }
 
+/* Project report view */
+td.data a.report,
+td.data a.externalLink {
+	display: block;	
+	background-repeat: no-repeat;
+	padding: 0 5px 0 36px;
+	height:32px;
+	float: left;
+	text-decoration: none;
+	font-size: 150%;
+	line-height: 32px;
+	color: #9D9999;
+}
+
+td.data a.report:hover,
+td.data a.externalLink:hover {
+	color: #000000;
+}
+
+td.data a.report {
+	background-image: url('../images/ext/report.ReportLink32.png');
+}
+
+td.data a.externalLink {
+	background-image: url('../images/ext/report.ExternalLink32.png');
+}
+
 /* Tree
 ----------------------------------------*/
 .indent-tree {  padding-left: 15px; }

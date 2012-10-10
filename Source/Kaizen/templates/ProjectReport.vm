@@ -46,19 +46,35 @@
       </span>
     #end
   </h1>
-  #if ($externalLinks.Length > 0)
+   
     <div class="section-content">
-      <table>
-        #foreach ($externalLink in $externalLinks)
+     <table>
+      #if ($noLogsAvailable)
+        <tr>
+          <td>
+            There are currently no build logs available for this project - make sure your Build Server configuration is correct and that this Project's build is not throwing any exceptions
+          </td>
+        </tr>
+      #else
+        #if ($pluginInfo)
           <tr>
-            <td>
-              <a class="externalLink" href="$externalLink.Url">$externalLink.Name</a>
-            </td>
+            <td class="label strong">Most Recent Build Results</td>
+          </tr>
+          <tr>
+            <td class="data">$pluginInfo</td>
           </tr>
         #end
-      </table>
-    </div>
-  #end
+        <tr>
+          <td class="data">
+			<a class="report" href="$mostRecentBuildUrl">Full build report</a>
+		  </td>
+        </tr>
+      #end
+    </table>
+    </div> 
+
+  
+ 
 </div>
 <div class="section">
   <h1 class="title">
@@ -99,29 +115,19 @@
 </div>
 <div class="section">
   <h1 class="title">
-    <span class="title">Build</span>
+    <span class="title">Related links</span>
   </h1>
   <div class="section-content">
     <table>
-      #if ($noLogsAvailable)
         <tr>
-          <td>
-            There are currently no build logs available for this project - make sure your Build Server configuration is correct and that this Project's build is not throwing any exceptions
-          </td>
-        </tr>
-      #else
-        #if ($pluginInfo)
-          <tr>
-            <td class="label strong">Most Recent Build Results</td>
-          </tr>
-          <tr>
-            <td class="data">$pluginInfo</td>
-          </tr>
-        #end
-        <tr>
-          <td class="data">Click <a href="$mostRecentBuildUrl">here</a> for the full build report.</td>
-        </tr>
-      #end
+          <td class="data">		  
+			   #if ($externalLinks.Length > 0)			
+					#foreach ($externalLink in $externalLinks)				  
+						  <a class="externalLink" href="$externalLink.Url">$externalLink.Name</a>
+					#end			  
+			   #end
+		  </td>
+        </tr>      
     </table>
   </div>
 </div>

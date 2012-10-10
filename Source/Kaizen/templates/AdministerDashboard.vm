@@ -176,7 +176,7 @@
 			#foreach ($Server in $Servers)
 			<tr>
 				<td class="data strong">
-					<a class="dialog-link">
+					<a href="#" class="dialog-link">
 						<span class="data-name">$Server.Name</span>
 					</a>
 					
@@ -193,7 +193,7 @@
 					#end
 				</td>
 				<td class="data">
-					<a class="dialog-link">
+					<a href="#" class="dialog-link">
 						<span class="data-url">$Server.Url</span>
 					</a>
 				</td>
@@ -214,24 +214,16 @@
 		<span class="title">Packages</span>
 	</h1>
 	<div class="section-content">
-        <table>
-            <tr>
-                <td colspan="3">
-                    <h2> <!-- Yes, it sucks, change to some more html-compatible construct.. -->
-                        Dashboard Packages
-                    </h2>
-                </td>
-            </tr>
+		<table>
 			<tr>
 				<td class="label strong">Name</td>
 				<td class="label strong">Description</td>
 				<td class="label strong">Status</td>
 			</tr>
-            
-            #foreach ($Package in $DashboardPackages)
-            <tr>
+			#foreach ($Package in $Packages)
+			<tr>
 				<td class="data strong">
-					<a class="dialog-link">
+					<a href="#" class="dialog-link">
 						<span class="data-name">$Package.Name</span>
 					</a>
 					<span class="hidden data-filename">$Package.FileName</span> 
@@ -245,114 +237,8 @@
                     #end
 				</td>
 			</tr>
-            #end
-
-            <tr>
-                <td colspan="3">
-                    <h2>
-                        <!-- Yes, it sucks, change to some more html-compatible construct.. -->
-                        Server Packages
-                    </h2>
-                </td>
-            </tr>
-            <tr>
-                <td class="label strong">Name</td>
-                <td class="label strong">Description</td>
-                <td class="label strong">Status</td>
-            </tr>
-            #foreach ($Package in $ServerPackages)
-            <tr>
-                <td class="data strong">
-                    <a class="dialog-link">
-                        <span class="data-name">$Package.Name</span>
-                    </a>
-                    <span class="hidden data-filename">$Package.FileName</span>
-                </td>
-                <td class="data">
-                    <span class="data-description">$Package.Description</span>
-                </td>
-                <td class="data">
-                    #if ($Package.IsInstalled)
-                    <span class="data-installed">[Installed]</span>
-                    #else
-                    <span class="data-not-installed">[Not installed]</span>
-                    #end
-                </td>
-            </tr>
-            #end
-
-            <tr>
-                <td colspan="3">
-                    <h2>
-                        <!-- Yes, it sucks, change to some more html-compatible construct.. -->
-                        Project Packages
-                    </h2>
-                </td>
-            </tr>
-            <tr>
-                <td class="label strong">Name</td>
-                <td class="label strong">Description</td>
-                <td class="label strong">Status</td>
-            </tr>
-            
-            #foreach ($Package in $ProjectPackages)
-            <tr>
-                <td class="data strong">
-                    <a class="dialog-link">
-                        <span class="data-name">$Package.Name</span>
-                    </a>
-                    <span class="hidden data-filename">$Package.FileName</span>
-                </td>
-                <td class="data">
-                    <span class="data-description">$Package.Description</span>
-                </td>
-                <td class="data">
-                    #if ($Package.IsInstalled)
-                    <span class="data-installed">[Installed]</span>
-                    #else
-                    <span class="data-not-installed">[Not installed]</span>
-                    #end
-                </td>
-            </tr>
-            #end
-
-
-            <tr>
-                <td colspan="3">
-                    <h2>
-                        <!-- Yes, it sucks, change to some more html-compatible construct.. -->
-                        Build Packages
-                    </h2>
-                </td>
-            </tr>
-            <tr>
-                <td class="label strong">Name</td>
-                <td class="label strong">Description</td>
-                <td class="label strong">Status</td>
-            </tr>
-            
-            #foreach ($Package in $BuildPackages)
-            <tr>
-                <td class="data strong">
-                    <a class="dialog-link">
-                        <span class="data-name">$Package.Name</span>
-                    </a>
-                    <span class="hidden data-filename">$Package.FileName</span>
-                </td>
-                <td class="data">
-                    <span class="data-description">$Package.Description</span>
-                </td>
-                <td class="data">
-                    #if ($Package.IsInstalled)
-                    <span class="data-installed">[Installed]</span>
-                    #else
-                    <span class="data-not-installed">[Not installed]</span>
-                    #end
-                </td>
-            </tr>
-            #end
-
-            <tr>
+			#end
+			<tr>
 				<td colspan="3">
 					<form method="post">
         				<input type="button" id="loadPackageButton" value="Load Package" class="dialog-link" />
