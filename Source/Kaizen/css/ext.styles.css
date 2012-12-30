@@ -1,0 +1,183 @@
+/*
+Styles version 1.0
+by sinnerinc
+
+History:
+# 2012-02-14: 
+	Initial version
+*/
+
+/* General
+----------------------------------*/
+.leftBlock {
+	float: left;
+	display: block;
+}
+
+.rightBlock {
+	float: right;
+	display: block;
+}
+
+/* Main template overrides
+-----------------------------------*/
+#menu .section LI { height: auto; }
+.route a:hover { color: gray; }
+#header, #footer { border-color: #E7E3E3; }
+
+/* Alternate rows
+-----------------------------------*/
+.evenRow { background: #FFF url("../images/ext/menu_links_bg_alter.png"); }
+.inner-rule-description { background: #FFF url("../images/ext/menu_links_bg_contrast.png"); color: #787373; }
+
+/* Icons
+------------------------------------*/
+.expandRule {
+	display: block;
+	width: 24px;
+	height: 22px;
+	text-indent: -99999px; 
+	overflow: hidden; 
+	background-repeat: no-repeat; 
+	background-image: url('../images/ext/Expand20.png');
+	float: right;
+}
+
+/* Header
+------------------------------------*/
+.title-data img{ margin-top:3px;	}
+.title-data div{	float: left; }
+
+/* Misc 
+------------------------------------*/
+.fxcopUsageCategory { font-style: italic; color: #a7a1a1; }
+
+div.fxcop-breaking-reason { /* actually ugly hack, otherwise FF or Chrome won't break line in long file names.... */
+	word-break:break-all;
+    word-wrap: break-word;
+	font-weight: bold;
+	width: 650px;
+}
+
+a.regularHover { text-decoration: none; }
+a.regularHover:hover { text-decoration: underline; }
+table.inner-rule-description span.NonBreaking { color: #5A9D5B; font-size: 80%; }
+table.inner-rule-description span.Breaking { color: #770606; font-size: 80%; }
+
+td.stylecop-filename-report {
+	background: #FFF url("../images/ext/menu_links_bg_red.png");
+	color: #770606;
+	font-size: 110%;
+	padding: 3px;
+	overflow: hidden;
+	word-break: break-all;
+}
+
+tr.msbuild-summary-success td, tr.msbuild-summary-failure td  {
+	font-weight: bold;	
+	padding: 3px;
+	vertical-align: top;
+}
+
+.table-container { table-layout: fixed; }
+.table-container tr{}
+.table-container tr td {}
+.table-container tr td span.long-text {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 760px;
+	display: block;	
+}
+
+/*.table-container tr td span:hover {
+	overflow: visible;
+}*/
+
+tr.msbuild-summary-success td { background: #FFF url("../images/ext/menu_links_bg_green.png"); }
+tr.msbuild-summary-failure td { background: #FFF url("../images/ext/menu_links_bg_red.png"); }
+tr.msbuild-project td, tr.msbuild-target td { font-weight: bold; }
+tr.msbuild-message-normal td, tr.msbuild-message-low td, tr.msbuild-message-high td { word-break: break-all; }
+tr.msbuild-message-normal td { color: #887B72; }
+tr.msbuild-message-low td { color: #ADA39D; }
+tr.msbuild-message-high td { color: #554A43; font-style: italic; }
+tr.msbuild-warning td { color: #D26117; }
+
+div.section a.msbuildMessagesOn, div.section a.msbuildMessagesOff {
+	display: block; text-indent: -99999px; overflow: hidden; width: 32px; height: 32px;
+	background-repeat: no-repeat; background-image: url('../images/ext/MessagesSprint32.png'); 	
+	float: left;
+}
+div.section a.msbuildMessagesOn {  background-position: 0px 0px; }
+div.section a.msbuildMessagesOff { background-position: 0px -32px; }
+
+.buildLogIcon {width: 12px; height: 12px; margin-right: 4px; }
+.certaintyCell { width: 70px; }
+.lineNumberCell { width: 60px; }
+.innerWrapper {display: none; }
+.forceThin { font-weight: normal; color: #ADA39D; }
+.mspec-context-name { font-size: 110%; font-style: italic; }
+.stacktrace { font-size: 90%; font-style: italic; }
+
+/* Modifications section in report */
+.data-modification-user img {
+	width: 48px;
+}
+
+.data-modification-comment {
+	font-style: italic;
+}
+
+.data-modification-filename {
+	font-weight: bold;
+}
+
+.data-modification-date {
+	text-align: right;
+	color: #ADA39D; 
+	font-style: italic;
+}
+
+.data img.filestate {
+	width: 16px;
+	margin-right: 4px;
+}
+
+/* Project report view */
+td.data a.report,
+td.data a.externalLink {
+	display: block;	
+	background-repeat: no-repeat;
+	padding: 0 5px 0 36px;
+	height:32px;
+	float: left;
+	text-decoration: none;
+	font-size: 150%;
+	line-height: 32px;
+	color: #9D9999;
+}
+
+td.data a.report:hover,
+td.data a.externalLink:hover {
+	color: #000000;
+}
+
+td.data a.report {
+	background-image: url('../images/ext/report.ReportLink32.png');
+}
+
+td.data a.externalLink {
+	background-image: url('../images/ext/report.ExternalLink32.png');
+}
+
+/* Tree
+----------------------------------------*/
+.indent-tree {  padding-left: 15px; }
+
+/* Log
+----------------------------------------*/
+.log-warning { color: #ff7f00; }
+.log-error { color: #CC0000; font-weight: bold; }
+.log-target { font-style: italic; }
+.log-project { font-weight: bold; }
+.log-message { color: #7f7f7f; }
+

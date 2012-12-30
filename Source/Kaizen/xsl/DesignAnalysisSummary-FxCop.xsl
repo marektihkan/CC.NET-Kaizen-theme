@@ -26,7 +26,7 @@
   <xsl:variable name="designanalysis.iswarning" select="$designanalysis.warning.level &gt;= $designanalysis.warning.boundary" />
   <xsl:variable name="designanalysis.issuccess" select="not($designanalysis.isfailed) and not($designanalysis.iswarning)" />
 
-  <xsl:variable name="designanalysis.title.name" select="'Design Analysis'" />
+  <xsl:variable name="designanalysis.title.name" select="'FxCop Report'" />
   <xsl:variable name="designanalysis.title.data">
     <xsl:choose>
       <xsl:when test="$designanalysis.isfailed">

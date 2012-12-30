@@ -1,4 +1,23 @@
 <!-- ProjectGrid.vm: Start -->
+<script type="text/javascript">
+  $(function(){
+      $('#parameterCheck').dialog({
+      autoOpen:false,
+      modal:true,
+      title:'$translations.Translate("Project Parameters")',
+      width:400,
+      height:300,
+      overlay:{
+      opacity:0.5,
+      background:'black'
+      }
+      });
+  });
+</script>
+<div id="parameterCheck" style="display:none;">
+  <div id="parameterEditor">$translations.Translate("Loading parameters, please wait...")</div>
+</div>
+
 #if ($forceBuildMessage.Length > 0)
 <div class="message success">
   <span>$forceBuildMessage</span>
@@ -99,7 +118,7 @@
                 <input type="hidden" name="projectName" value="$projectGridRow.Name" />
                 <input type="hidden" name="serverName" value="$projectGridRow.ServerName" />
                 #if ($projectGridRow.allowForceBuild)
-                  <input type="submit" name="$projectGridRow.ForceAbortBuildButtonName" value="$projectGridRow.ForceAbortBuildButtonValue"/>
+                  <input type="button" name="$projectGridRow.ForceAbortBuildButtonName" value="$projectGridRow.ForceAbortBuildButtonValue" onclick="checkForParams(this, '$projectGridRow.ParametersUrl')"/>
                 #end
                 #if ($projectGridRow.AllowStartStopBuild)				
                   <input type="submit" name="$projectGridRow.StartStopButtonName" value="$projectGridRow.StartStopButtonValue"/>

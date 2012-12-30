@@ -1,6 +1,6 @@
 /* Base
 ----------------------------------*/
-BODY { margin: 0px; padding: 0px; background-color: #FFF; font-family: helvetica; font-size: 12px; }
+BODY { margin: 0px; padding: 0px; background-color: #FFF; font-family: verdana; font-size: 11px; }
 /* Firefox alignment hack */
 BODY { text-align: -moz-center; }
 TABLE { width: 100%; background: #FFF url("../images/menu_links_bg.png"); }
@@ -8,7 +8,7 @@ THEAD, .strong { font-weight: bold; }
 
 .data, .label { overflow: hidden; }
 
-BR { display: none; }
+/*BR { display: none; } */
 A { text-decoration: none; cursor: hand; cursor: pointer; }
 .dialog, .hidden { display: none; }
 
@@ -93,7 +93,7 @@ INPUT.invalid { background-color: #ce2a1b; }
 ----------------------------------*/
 .success-text { color: #4e800c !important; }
 .failed-text { color: #ce2a1b !important; }
-.warning-text { color: #f0b440 !important; }
+.warning-text { color: #B77F12 !important; }
 .failed-underline { border-bottom: dotted 2px #ce2a1b; }
 
 /* Layout

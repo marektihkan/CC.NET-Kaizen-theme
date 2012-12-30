@@ -2,7 +2,8 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="html"/>
   <xsl:include href="Design.xsl" />
-
+  <xsl:param name="applicationPath" select="'.'" />
+ 
   <!-- Tool specific variables -->
   <xsl:variable name="sourcecontrol.root" select="/cruisecontrol/modifications"/>
   <xsl:variable name="sourcecontrol.isavailable" select="count($sourcecontrol.root) &gt; 0" />
@@ -34,6 +35,17 @@
   <!-- Main template -->
   <xsl:template match="/">
     <xsl:if test="$sourcecontrol.isavailable">
+		<script type="text/javascript">
+        $(document).ready(function()
+        {
+            $('.data-modification-user').each(function(i)
+			{
+				username = $(this).attr('data-username');
+				$(this).empty().append($.gravatar(username));
+			});
+        });
+        </script>
+	
       <xsl:call-template name="summary" />
     </xsl:if>
   </xsl:template>
@@ -72,21 +84,33 @@
   </xsl:template>
 
   <xsl:template match="modification">
-    <tr>
+    <tr>      
       <td class="data">
-        <span class="data-modification-type"><xsl:value-of select="@type"/></span>
+        <div class="data-modification-user">
+			<xsl:attribute name="data-username">
+				<xsl:value-of select="user"/>
+			  </xsl:attribute>
+			  <xsl:attribute name="title">
+				<xsl:value-of select="user"/>
+			  </xsl:attribute>
+			<xsl:value-of select="user"/>
+		</div>
       </td>
-      <td class="data">
-        <span class="data-modification-user"><xsl:value-of select="user"/></span>
+	  <td class="data">
+		<img class="filestate">
+			<xsl:attribute name="title">
+				<xsl:value-of select="@type"/>
+			  </xsl:attribute>
+			  <xsl:attribute name="src">
+					<xsl:value-of select="$applicationPath" />/Themes/Kaizen/images/ext/scm.<xsl:value-of select="@type"/>.png
+			  </xsl:attribute>			
+		</img>
+		<span class="data-modification-filename"><xsl:value-of select="filename"/></span>
+		<br />
+		<span class="data-modification-comment"><xsl:value-of select="comment"/></span>
       </td>
-      <td class="data">
-        <span class="data-modification-filename"><xsl:value-of select="filename"/></span>
-      </td>
-      <td class="data">
-        <span class="data-modification-comment"><xsl:value-of select="comment"/></span>
-      </td>
-      <td class="data">
-        <span class="data-modification-date"><xsl:value-of select="date"/></span>
+      <td class="data data-modification-date">
+        <span><xsl:value-of select="date"/></span>
       </td>
     </tr>
   </xsl:template>
