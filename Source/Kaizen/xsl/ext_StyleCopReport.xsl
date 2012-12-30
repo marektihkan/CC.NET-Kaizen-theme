@@ -6,6 +6,8 @@ by sinnerinc
 History:
 # 2012-02-14: 
 	Initial version
+# 2012-12-30:
+	Limiting number of files/warnings per file displayed (https://github.com/sinnerinc/CC.NET-Kaizen-theme/issues/1)
 -->
 
 <!-- Designed by Yves Tremblay of ProgiNet Inc. and SBG International Inc. -->
@@ -15,7 +17,9 @@ History:
   <xsl:include href="ext_Utils.xsl" />
   <xsl:include href="ext_StyleCopSummary.xsl" />
   
-  <xsl:variable name="unique.source" select="$stylecop.root/Violation[not(@Source = preceding-sibling::Violation/@Source)]" />
+ <xsl:variable name="unique.source" select="$stylecop.root/Violation[not(@Source = preceding-sibling::Violation/@Source)]" />
+ <xsl:variable name="limit.filesToDisplay" select="0" />
+ <xsl:variable name="limit.violationsToDisplayPerFile" select="0" />
   
   <!-- Main template -->
   <xsl:template match="/">
@@ -27,41 +31,43 @@ History:
    <!-- Content template -->
   <xsl:template name="content">
 		<xsl:for-each select="$unique.source">
-			<xsl:variable name="source" select="./@Source"/>
-			<xsl:variable name="stylecop.filesection.title">
-				<xsl:call-template name="getFilenameFromPath">
-					<xsl:with-param name="path" select="substring(./@Source, $build.working.dir.length)"/>
-				</xsl:call-template>
-			</xsl:variable>
-			
-			<div class="section">
-				<xsl:call-template name="createTitle">
-				  <xsl:with-param name="isfailed" select="1" />
-				  <xsl:with-param name="iswarning" select="0" />
-				  <xsl:with-param name="issuccess" select="0" />
-				  <xsl:with-param name="title" select="$stylecop.filesection.title" />
-				  <xsl:with-param name="data">					
-					<div>
-						<img src="{$applicationPath}/Themes/Kaizen/images/ext/Warning.png" title="Warnings" />
-						<span><xsl:value-of select="count(//Violation[@Source=$source])" /></span>
-					</div>
-					<a class="expandAllRules" ref="{$stylecop.filesection.title}">
-						<img src="{$applicationPath}/Themes/Kaizen/images/ext/Expand.png" title="Expand/collapse all" style="width: 28px; height: 28px; margin:0;" class="collapsed" />
-					</a>
-				  </xsl:with-param>
-				</xsl:call-template>
-			
-				<div class="section-content">
-				  <xsl:attribute name="class">section-content failed-light</xsl:attribute>
-
-				  <!-- // MAIN TABLE WITH RESULTS -->
-				  <table cellpadding="2" cellspacing="0">
-					<xsl:call-template name="print-module-error-list">
-					  <xsl:with-param name="source" select="$source"/>
+			<xsl:if test="($limit.filesToDisplay = 0) or (not(position() > $limit.filesToDisplay))">
+				<xsl:variable name="source" select="./@Source"/>
+				<xsl:variable name="stylecop.filesection.title">
+					<xsl:call-template name="getFilenameFromPath">
+						<xsl:with-param name="path" select="substring(./@Source, $build.working.dir.length)"/>
 					</xsl:call-template>
-				  </table>
-				</div>			
-			</div>			
+				</xsl:variable>
+				
+				<div class="section">
+					<xsl:call-template name="createTitle">
+					  <xsl:with-param name="isfailed" select="1" />
+					  <xsl:with-param name="iswarning" select="0" />
+					  <xsl:with-param name="issuccess" select="0" />
+					  <xsl:with-param name="title" select="$stylecop.filesection.title" />
+					  <xsl:with-param name="data">					
+						<div>
+							<img src="{$applicationPath}/Themes/Kaizen/images/ext/Warning.png" title="Warnings" />
+							<span><xsl:value-of select="count(//Violation[@Source=$source])" /></span>
+						</div>
+						<a class="expandAllRules" ref="{$stylecop.filesection.title}">
+							<img src="{$applicationPath}/Themes/Kaizen/images/ext/Expand.png" title="Expand/collapse all" style="width: 28px; height: 28px; margin:0;" class="collapsed" />
+						</a>
+					  </xsl:with-param>
+					</xsl:call-template>
+				
+					<div class="section-content">
+					  <xsl:attribute name="class">section-content failed-light</xsl:attribute>
+
+					  <!-- // MAIN TABLE WITH RESULTS -->
+					  <table cellpadding="2" cellspacing="0">
+						<xsl:call-template name="print-module-error-list">
+						  <xsl:with-param name="source" select="$source"/>
+						</xsl:call-template>
+					  </table>
+					</div>			
+				</div>	
+			</xsl:if>
 		</xsl:for-each>
 	</xsl:template>
 	
@@ -77,6 +83,7 @@ History:
 	
 	
 	<xsl:for-each select='$stylecop.root/Violation[@Source = $source]'>
+		<xsl:if test="($limit.violationsToDisplayPerFile = 0) or (not(position() > $limit.violationsToDisplayPerFile))">
               <xsl:variable name="message.id" select="generate-id()" />
               <xsl:variable name="rule.id" select="@RuleId" />
               <xsl:variable name="rule.rule" select="@Rule" />
@@ -111,48 +118,23 @@ History:
 				<td></td>
 				<td colspan="2" class="contentCell">
 					<div class="innerWrapper" id="{$message.id}">
-							<table cellpadding="5" cellspacing="0" width="100%" class="inner-rule-description">	
-									<tr>
-									  <td>
-										<b>Rule:</b>
-									  </td>
-									  <td>
-										<xsl:value-of select="$rule.rule" />
-									  </td>
-									</tr>
-									<tr>
-									  <td>
-										<b>Rule ID:</b>
-									  </td>
-									  <td>
-										  <a>
-											<xsl:attribute name="href">http://stylecop.soyuz5.com/<xsl:value-of select="$rule.id" />.html</xsl:attribute>
-											<xsl:attribute name="target">_blank</xsl:attribute>
-											<xsl:value-of select="$rule.id" />
-										  </a>
-									  </td>
-									</tr>
-									<tr>
-									  <td>
-										<b>Rule Namespace:</b>
-									  </td>
-									  <td>
-										<xsl:value-of select="$rule.namespace" />
-									  </td>
-									</tr>
-									<tr>
-									  <td>
-										<b>Section:</b>
-									  </td>
-									  <td>
-										<xsl:value-of select="$section" />
-									  </td>
-									</tr>
-						  </table>
+						<table cellpadding="5" cellspacing="0" width="100%" class="inner-rule-description">	
+							<tr><td><b>Rule:</b></td><td><xsl:value-of select="$rule.rule" /></td></tr>
+							<tr><td><b>Rule ID:</b></td>
+								<td>
+								<a><xsl:attribute name="href">http://stylecop.soyuz5.com/<xsl:value-of select="$rule.id" />.html</xsl:attribute>
+								<xsl:attribute name="target">_blank</xsl:attribute>
+								<xsl:value-of select="$rule.id" /></a>
+								</td>
+							</tr>
+							<tr><td><b>Rule Namespace:</b></td><td><xsl:value-of select="$rule.namespace" /></td></tr>
+							<tr><td><b>Section:</b></td><td><xsl:value-of select="$section" /></td></tr>
+						</table>
                   </div>
                 </td>
               </tr>
-            </xsl:for-each>
+			</xsl:if>
+		</xsl:for-each>
 	
   </xsl:template>
 </xsl:stylesheet>
